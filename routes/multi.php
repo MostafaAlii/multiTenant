@@ -24,10 +24,10 @@ Route::get('/', function (Request $request) {
     if(in_array($host, array_keys($tenant_array))){
         //config(['database.connections.mysql.database' => $tenant_array[$host]]);
         $db = $tenant_array[$host];
-        DB::purge('mysql');
+        DB::purge('system');
         Config::set('database.connections.mysql.database', $tenant_array[$host]);
-        DB::reconnect('mysql');
+        DB::reconnect('system');
     }
-    dd(DB::table('admins')->get()->toArray());
+    //dd(DB::table('admins')->get()->toArray());
     return view('welcome', ['host' => $host]);
 });
