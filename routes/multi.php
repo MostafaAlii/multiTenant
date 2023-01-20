@@ -15,19 +15,10 @@ use Illuminate\Support\Facades\{DB, Config, Route};
 */
 
 Route::get('/', function (Request $request) {
-    $host = $request->getHost();
-    $tenant_array = [
-        'www.multi.test' => 'multi',
-        'app1.multi.test' => 'school',
-        'app2.multi.test' => 'news',
-    ];
-    if(in_array($host, array_keys($tenant_array))){
-        //config(['database.connections.mysql.database' => $tenant_array[$host]]);
-        $db = $tenant_array[$host];
-        DB::purge('system');
-        Config::set('database.connections.mysql.database', $tenant_array[$host]);
-        DB::reconnect('system');
-    }
-    //dd(DB::table('admins')->get()->toArray());
-    return view('welcome', ['host' => $host]);
+    dd(DB::table('admins')->get()->toArray(), DB::getDatabaseName(), DB::getDefaultConnection());
+    return view('welcome');
+});
+Route::get('/admin', function (Request $request) {
+    dd(DB::table('admins')->get()->toArray(), DB::getDatabaseName());
+    //return view('welcome');
 });
