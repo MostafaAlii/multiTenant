@@ -15,10 +15,6 @@ use Illuminate\Support\Facades\{DB, Config, Route};
 */
 
 Route::get('/', function (Request $request) {
-    dd(DB::table('admins')->get()->toArray(), DB::getDatabaseName(), DB::getDefaultConnection());
+    dd(DB::table('admins')->get()->toArray());
     return view('welcome');
-});
-Route::get('/admin', function (Request $request) {
-    dd(DB::table('admins')->get()->toArray(), DB::getDatabaseName());
-    //return view('welcome');
 });
