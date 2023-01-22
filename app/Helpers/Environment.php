@@ -1,6 +1,8 @@
 <?php
 namespace App\Helpers;
+use Dotenv\Dotenv;
 use Illuminate\Support\Str;
+
 class Environment {
     public function getEnvironment() {
         $server_name = $_SERVER['SERVER_NAME'];
@@ -28,11 +30,18 @@ class Environment {
             'base' => $base
         ];
     }
-
+    
     public function getSettings() {
         $env = $this->getEnvironment();
         $settings = $env['base'];
-        return $settings;
+        $path =  base_path() . DIRECTORY_SEPARATOR . $settings;
+        
+        $dotenv = Dotenv::createImmutable($path)->safeLoad();
+        
+        //$dotenv = Dotenv::createImmutable(base_path(), str_replace('.env', '', $settings))->load();
+        //$dotenv = Dotenv::create(base_path(). $settings)->load();
+        // remove 3 end segment of $path
+        return $dotenv;
     }
 }
     

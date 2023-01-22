@@ -13,7 +13,6 @@ class CheckTenant {
             Config::set('database.connections.tenant.database', $tenant->database_name);
             DB::reconnect('tenant');
             DB::setDefaultConnection('tenant');
-            
         }
         return $next($request);
     }
