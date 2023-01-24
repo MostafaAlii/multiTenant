@@ -10,18 +10,6 @@ class CheckTenant {
         $host = $request->getHost();
         $tenant = Tenant::whereDomain($host)->first();
         TenantService::setTenantConnection($tenant);
-
-
-
-
-
-        
-        /*if($tenant->domain_type !== config('tenant.primary_domain.domain_type')) {
-            DB::purge('system');
-            Config::set('database.connections.tenant.database', $tenant->database_name);
-            DB::reconnect('tenant');
-            DB::setDefaultConnection('tenant');
-        }*/
         return $next($request);
     }
 }
