@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\{DB, Config, Route};
 */
 
 Route::get('/', function (Request $request) {
-    dd(DB::table('admins')->get()->toArray());
+    //dd(DB::table('admins')->get()->toArray());
     return view('welcome');
 });
+
+Route::get('/test', [App\Http\Controllers\Dashboard\HomeController::class, 'index']);
